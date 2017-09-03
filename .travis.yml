@@ -4,6 +4,7 @@ compiler:
   - gcc
 os:
   - linux
+  - osx
 
 matrix:
   include:
@@ -29,6 +30,16 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.9
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    - os: osx
+      compiler: clang
+      osx_image: xcode8
+
+    - os: osx
+      compiler: gcc
+      osx_image: xcode8
       env:
         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
