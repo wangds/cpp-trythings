@@ -1,6 +1,6 @@
 #CXX := g++
 #CXX := clang++
-CXXFLAGS := -std=c++11 -W -Wall -Wextra
+CXXFLAGS := -std=c++14 -W -Wall -Wextra
 
 all: hello
 

@@ -29,9 +29,9 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-4.9
+            - g++-5
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+        - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
     - os: osx
       compiler: clang
@@ -41,7 +41,7 @@ matrix:
       compiler: gcc
       osx_image: xcode8
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
 
   # exclude default targets (i.e. without MATRIX_EVAL environment variables)
   exclude:
