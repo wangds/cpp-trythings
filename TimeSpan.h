@@ -3,12 +3,13 @@
 
 #include <cmath>
 #include <stdexcept>
+#include "MeasurementUnit.h"
 
-struct TimeSpan final
+struct TimeSpan final : public MeasurementUnit<TimeSpan>
 {
     constexpr explicit
     TimeSpan(double sec) :
-        m_value(sec)
+        MeasurementUnit(sec)
     {
         if (std::isnan(m_value)) {
             throw std::domain_error("TimeSpan: invariant (not NaN)");
@@ -20,52 +21,6 @@ struct TimeSpan final
     {
         return m_value;
     }
-
-    // Arithmetic Operators.
-    friend constexpr TimeSpan operator+(TimeSpan lhs, TimeSpan rhs)
-    {
-        return TimeSpan(lhs.m_value + rhs.m_value);
-    }
-
-    friend constexpr TimeSpan operator-(TimeSpan lhs, TimeSpan rhs)
-    {
-        return TimeSpan(lhs.m_value - rhs.m_value);
-    }
-
-    friend constexpr TimeSpan operator*(TimeSpan lhs, double rhs)
-    {
-        return TimeSpan(lhs.m_value * rhs);
-    }
-
-    friend constexpr TimeSpan operator*(double lhs, TimeSpan rhs)
-    {
-        return TimeSpan(lhs * rhs.m_value);
-    }
-
-    // Relational operators.
-    friend constexpr bool operator<(TimeSpan lhs, TimeSpan rhs)
-    {
-        return lhs.m_value < rhs.m_value;
-    }
-
-    friend constexpr bool operator<=(TimeSpan lhs, TimeSpan rhs)
-    {
-        return lhs.m_value <= rhs.m_value;
-    }
-
-    friend constexpr bool operator>(TimeSpan lhs, TimeSpan rhs)
-    {
-        return lhs.m_value > rhs.m_value;
-    }
-
-    friend constexpr bool operator>=(TimeSpan lhs, TimeSpan rhs)
-    {
-        return lhs.m_value >= rhs.m_value;
-    }
-
-private:
-
-    double m_value;
 };
 
 constexpr TimeSpan operator"" _s(long double sec)
